@@ -33,11 +33,12 @@ public class Drivetrain extends SubsystemBase {
     private static Drivetrain instance = null;
 
     public static Drivetrain getInstance() {
-        if (instance == null)
-        try {
-            instance = new Drivetrain();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (instance == null) {
+            try {
+                instance = new Drivetrain();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return instance;
@@ -109,6 +110,10 @@ public class Drivetrain extends SubsystemBase {
         this);
   }
 
+  public void zeroHeading() {
+    this.swerveDrive.zeroGyro(); 
+  }
+
     public Pose2d getPose() {
         return this.swerveDrive.getPose();
     }
@@ -145,7 +150,7 @@ public class Drivetrain extends SubsystemBase {
 
     public Command driveCommand(XboxController controller) {
         return run(() -> {
-          double multiplier = controller.getRightBumper() ? 0.4 : 1.0;
+          double multiplier = controller.getRightTriggerAxis() > 0.5 ? 0.4 : 1.0;
 
           double omega =
               DrivetrainConstants.kMaxTeleopRotationPercent
