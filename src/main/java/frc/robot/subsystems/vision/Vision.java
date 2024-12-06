@@ -1,3 +1,5 @@
+package frc.robot.subsystems.vision;
+
 import java.util.Optional;
 
 import org.photonvision.EstimatedRobotPose;
@@ -10,18 +12,17 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
 public class Vision extends SubsystemBase {
 
-private final PhotonCamera mainCamera;
 private final PhotonCamera noteCamera;
 
 private final PhotonPoseEstimator visionEstimator;
 public Drivetrain swerveDrive;
 public Vision (Drivetrain swerveDrive) {
  this.swerveDrive =  swerveDrive;
-this.mainCamera = new PhotonCamera(DrivetrainConstants.kMainCameraName);
 this.noteCamera = new PhotonCamera(DrivetrainConstants.kNoteCameraName);
 
 this.visionEstimator =
